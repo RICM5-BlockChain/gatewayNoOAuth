@@ -22,7 +22,7 @@
             "content/css/vendor.css",
             "content/css/global.css"
         ],
-        "scripts": []
+        "scripts": ["dragndrop.js"]
     }],
     "lint": [{
             "project": "../../../tsconfig.json"
