@@ -42,10 +42,13 @@
     </script>-->
 </body>
 
+<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/sha256.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.7/sjcl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.354/pdf.js"></script>
 <script>
 
     function dragHandler(event) {
@@ -81,13 +84,21 @@
 
         for (var i = 0; i < files.length; i++) {
 
+            var toType = function(obj) {
+                return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+            }
+
             var r = new FileReader();
             var output = document.getElementById("result");
 
             r.onload = function(){
-                var sha = CryptoJS.SHA256(this.result);
+                console.log(this.result);
+                console.log(toType(this.result));
+                var sha = CryptoJS.SHA256(CryptoJS.enc.Latin1.parse(this.result));
+                var bitArray = sjcl.hash.sha256.hash(CryptoJS.enc.Latin1.parse(this.result));
+                var digest_sha256 = sjcl.codec.hex.fromBits(bitArray);
 
-                $("#sha-res").html("<p> SHA calculated : " + sha.toString() + "</p>");
+                $("#sha-res").html("<p> SHA calculated : " + sha + "</p>");
 
                 var protocol = location.protocol;
                 var slashes = protocol.concat("//");
