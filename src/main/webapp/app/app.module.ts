@@ -1,8 +1,10 @@
 import './vendor.ts';
 
 import { NgModule, Injector } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
 
@@ -31,6 +33,7 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         GatewayNoOAuthAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         GatewayNoOAuthSharedModule,
@@ -38,6 +41,7 @@ import {
         GatewayNoOAuthAdminModule,
         GatewayNoOAuthAccountModule,
         GatewayNoOAuthEntityModule,
+        HttpClientModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
