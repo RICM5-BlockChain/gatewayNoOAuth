@@ -11,7 +11,7 @@
                     <!-- <input type="text" class="form-control" id="transaction-id" required> -->
                 </div>
             </div>
-            <div id="drop_area" class="area">
+            <div id="drop_area" class="area" drop_area>
                 Drop your file here! Or ... <br>
                 <!-- <input type="file" name="file" id="file" onchange="filesDroped()"> -->
                 <input type="file" name="file" (change)="fileSelected($event.target.files[0])">
@@ -22,20 +22,33 @@
     </div>
 
     <div class="col-md-3" id="result">
-        <p id="filename"></p>
-        <p id="filesize"></p>
-        <ul id="steps">
-            <li id="">test</li>
-            <li id="">test</li>
-            <li id="">test</li>
+        <p *ngIf="filename"> file name : {{ filename }} </p>
+        <p *ngIf="filesize"> file size : {{ filesize }} bits</p>
+        <ul *ngIf="steps" id="steps">
+            Process :
+            <!-- <li id="">test</li> Template element --> 
+            <li *ngFor="let step of steps">
+                <small>{{ step }}</small>
+            </li>
         </ul>
     </div>
 
 </div>
 
-<div id="sha-calculated">
-
+<div id="sha_calculated" *ngIf="sha_calculated">
+    SHA256 : {{ sha_calculated }}
 </div>
 
-
-
+<div *ngIf="result; else other_content">
+    <h1 class="display-15" style="color: green;">
+        <i class="fa fa-check"> authentication success </i>
+    </h1>
+</div>
+<ng-template #other_content>
+    <ng-container *ngIf="result != null; else third">
+        <h1 class="display-15" style="color: red;">
+            <i class="fa fa-times"> authentication failed </i>
+        </h1>
+    </ng-container>
+</ng-template>
+<ng-template #third></ng-template>

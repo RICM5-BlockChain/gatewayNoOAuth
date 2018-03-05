@@ -20,6 +20,7 @@ import { GatewayNoOAuthAccountModule } from './account/account.module';
 import { GatewayNoOAuthEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+
 import {
     JhiMainComponent,
     NavbarComponent,
