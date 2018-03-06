@@ -29,7 +29,8 @@
     "swagger-ui": "2.2.10",
     "tether": "1.4.0",
     "zone.js": "0.8.19",
-    "crypto-js": "3.1.9"
+    "crypto-js": "3.1.9",
+    "sjcl": "1.0.6"
   },
   "devDependencies": {
     "@angular/cli": "1.6.6",

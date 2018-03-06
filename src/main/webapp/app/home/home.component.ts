@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
                 const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).subscribe(
                     (res) => {
                         const sha_receveid = res['digest'];
-                        if (this.sha_calculated === sha_receveid) {
+                        if (this.sha_calculated.toUpperCase === sha_receveid) {
                             this.result = true;
                         } else {
                             this.result = false;
