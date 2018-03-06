@@ -69,22 +69,28 @@ export class HomeComponent implements OnInit {
         this.reader.onload = (e) => {
             this.sha_calculated = crypto.SHA256(
                 crypto.enc.Latin1.parse(e.target['result']))
-                .toString(crypto.enc.Hex);
+                .toString(crypto.enc.Hex).toUpperCase();
             if ( this.transactionId === '' ||
         !this.transactionId) {
                 this.error = this.error_message;
             } else {
                 this.steps.push('Querying server');
-                const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).subscribe(
-                    (res) => {
-                        const sha_receveid = res['digest'];
-                        if (this.sha_calculated.toUpperCase === sha_receveid) {
-                            this.result = true;
-                        } else {
-                            this.result = false;
-                        }
-                    }
-                );
+                const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).map( (Response) => {
+                    console.log(Response);
+                }).catch ((any) => {
+                    console.log(error);
+                });
+                // .subscribe(
+                //     (res) => {
+                //         const sha_receveid = res['digest'];
+                //         this.steps.push('sha receveid : ' + sha_receveid);
+                //         if (this.sha_calculated === sha_receveid) {
+                //             this.result = true;
+                //         } else {
+                //             this.result = false;
+                //         }
+                //     }
+                // );
                 console.log(sha_from_bc);
             }
         };
