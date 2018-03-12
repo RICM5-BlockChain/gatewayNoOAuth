@@ -77,20 +77,17 @@ export class HomeComponent implements OnInit {
                 this.steps.push('Querying server');
                 const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).map( (Response) => {
                     console.log(Response);
-                }).catch ((any) => {
-                    console.log(error);
-                });
-                // .subscribe(
-                //     (res) => {
-                //         const sha_receveid = res['digest'];
-                //         this.steps.push('sha receveid : ' + sha_receveid);
-                //         if (this.sha_calculated === sha_receveid) {
-                //             this.result = true;
-                //         } else {
-                //             this.result = false;
-                //         }
-                //     }
-                // );
+                }).subscribe(
+                    (res) => {
+                        const sha_receveid = res['digest'];
+                        this.steps.push('sha receveid : ' + sha_receveid);
+                        if (this.sha_calculated === sha_receveid) {
+                            this.result = true;
+                        } else {
+                            this.result = false;
+                        }
+                    }
+                );
                 console.log(sha_from_bc);
             }
         };
