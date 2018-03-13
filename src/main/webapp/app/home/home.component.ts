@@ -75,10 +75,8 @@ export class HomeComponent implements OnInit {
                 this.error = this.error_message;
             } else {
                 this.steps.push('Querying server');
-                const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).map( (Response) => {
-                    console.log(Response);
-                }).subscribe(
-                    (res) => {
+                const sha_from_bc = this.http.get(this.queryUrl + this.transactionId).subscribe(res => {
+                        console.log(res);
                         const sha_receveid = res['digest'];
                         this.steps.push('sha receveid : ' + sha_receveid);
                         if (this.sha_calculated === sha_receveid) {
