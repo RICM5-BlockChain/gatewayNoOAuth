@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
     /* Main process, questionning API to compare both SHA */
     queryProcess(file: File) {
         /* Reading file to calculate SHA256 */
+        this.result = false;
         this.reader.onload = (e) => {
             this.sha_calculated = crypto.SHA256(
                 crypto.enc.Latin1.parse(e.target['result']))
